@@ -13,10 +13,10 @@ import {connect} from 'react-redux'
 import {getCustomers, getHistory, getComHistory} from './actions/customer'
 import {loadUser} from './actions/auth'
 import { useEffect } from 'react';
-import store from './store'
+import store from './store';
 import NewAdmin from './components/NewAdmin';
 
-function App({getCustomers, getHistory, loadUser, getComHistory, isAuthenticated}) {
+function App({getCustomers, getHistory, loadUser, getComHistory}) {
 
   useEffect(()=> {  
     loadUser();
@@ -36,7 +36,7 @@ function App({getCustomers, getHistory, loadUser, getComHistory, isAuthenticated
         <PrivateRoute path="/deposit" component={Deposit} />
         <PrivateRoute path="/withdraw" component={Withdraw} />
         <PrivateRoute path="/new-admin" component={NewAdmin} />
-        <Route path="/login" component={Login} />
+        <ForwardAuthenticated path="/login" component={Login} />
         <PrivateRoute path="/change-password" component={ChangePassword} />
       </Switch>
     </BrowserRouter>
@@ -44,15 +44,13 @@ function App({getCustomers, getHistory, loadUser, getComHistory, isAuthenticated
 };
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => store.getState().auth.isAuthenticated
+  <Route {...rest} render={props => store.getState().isAuthenticated
   ? <Component {...props} /> : <Redirect to="/login"/>}
   />
 )
 
-
-
 const ForwardAuthenticated = ({component: Component, ...rest}) => (
-  <Route {...rest} render={props => store.getState().auth.isAuthenticated
+  <Route {...rest} render={props => store.getState().isAuthenticated
   ?<Redirect to="/"/>:<Component {...props}/>}
   />
 )
