@@ -23,7 +23,7 @@ function Login({login}) {
 
         }catch(err){
             setLoading(false);
-            typeof err.response === 'object'
+            typeof err.response.data === 'object'
             ?setErrorMsg(err.response.data.msg[0].msg)
             :setErrorMsg("Please check your internet connection!")
         }
