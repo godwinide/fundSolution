@@ -1,0 +1,12 @@
+export const GET_CUSTOMERS = "GET_CUSTOMERS"
+export const GET_HISTORY = "GET_HISTORY"
+export const GET_COMMISSION_HISTORY = "GET_COMMISSION_HISTORY"
+
+
+// AUTH
+export const USER_LOADING = "USER_LOADING"
+export const USER_LOADED = "USER_LOADED"
+export const AUTH_ERROR = "AUTH_ERROR"
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
+export const LOGIN_FAIL = "LOGIN_FAIL"
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS"
