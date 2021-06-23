@@ -36,7 +36,7 @@ function App({getCustomers, getHistory, loadUser, getComHistory, isAuthenticated
         <PrivateRoute path="/deposit" component={Deposit} />
         <PrivateRoute path="/withdraw" component={Withdraw} />
         <PrivateRoute path="/new-admin" component={NewAdmin} />
-        <ForwardAuthenticated path="/login" component={Login} />
+        <Route path="/login" component={Login} />
         <PrivateRoute path="/change-password" component={ChangePassword} />
       </Switch>
     </BrowserRouter>
