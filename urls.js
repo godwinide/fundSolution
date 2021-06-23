@@ -1,3 +1,5 @@
+import path from 'path'
+
 module.exports = app => {
     app.use("/api/customers", require("./routes/api/customers"));
     app.use("/api/deposit", require("./routes/api/deposit"));
