@@ -1,4 +1,3 @@
-$.noConflict();
 
 const activateMenu = () => {
 	jQuery(document).ready(function($) {

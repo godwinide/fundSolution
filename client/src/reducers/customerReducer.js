@@ -14,7 +14,6 @@ const reducer = (state = INITIAL_STATE, action) => {
                 ...state, customers: action.payload
             };
         case GET_HISTORY:
-            console.log(action.payload)
             return {
                 ...state, history: action.payload
             };
