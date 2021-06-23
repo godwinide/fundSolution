@@ -1,4 +1,4 @@
-import path from 'path'
+const path = require('path');
 
 module.exports = app => {
     app.use("/api/customers", require("./routes/api/customers"));
