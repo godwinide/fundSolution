@@ -28,7 +28,7 @@ router.post("/login", async (req,res) => {
                 return_errors(400);
             }else{
                 const matched = await bcrypt.compare(password, user.password)
-                if(matched){
+                if(!matched){
                     errors.push({msg: "Incorrect username or password"})
                     return_errors(400)
                 }else{

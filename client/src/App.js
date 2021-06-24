@@ -13,10 +13,10 @@ import {connect} from 'react-redux'
 import {getCustomers, getHistory, getComHistory} from './actions/customer'
 import {loadUser} from './actions/auth'
 import { useEffect } from 'react';
-import store from './store';
+import store from './store'
 import NewAdmin from './components/NewAdmin';
 
-function App({getCustomers, getHistory, loadUser, getComHistory}) {
+function App({getCustomers, getHistory, loadUser, getComHistory, isAuthenticated}) {
 
   useEffect(()=> {  
     loadUser();
@@ -44,13 +44,15 @@ function App({getCustomers, getHistory, loadUser, getComHistory}) {
 };
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => store.getState().isAuthenticated
+  <Route {...rest} render={props => store.getState().auth.isAuthenticated
   ? <Component {...props} /> : <Redirect to="/login"/>}
   />
 )
 
+
+
 const ForwardAuthenticated = ({component: Component, ...rest}) => (
-  <Route {...rest} render={props => store.getState().isAuthenticated
+  <Route {...rest} render={props => store.getState().auth.isAuthenticated
   ?<Redirect to="/"/>:<Component {...props}/>}
   />
 )
