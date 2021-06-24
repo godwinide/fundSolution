@@ -29,7 +29,7 @@ const ChangePassword = ({getCustomers, getHistory}) => {
         }catch(err){
             window.scrollTo(500, 0);
             setLoading(false);
-            typeof err.response.data === 'object'
+            typeof err.response === 'object'
             ?setErrorMsg(err.response.data.msg[0].msg)
             :setErrorMsg("Please check your internet connection!")
         }
