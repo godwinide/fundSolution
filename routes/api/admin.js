@@ -23,6 +23,7 @@ router.post("/login", async (req,res) => {
     else{
         try{
             const user = await Admin.findOne({username: username})
+            console.log(user)
             if(!user) {
                 errors.push({msg: "Incorrect username or password"})
                 return_errors(400);
