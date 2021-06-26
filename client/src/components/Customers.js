@@ -3,7 +3,7 @@ import Header from './layout/Header'
 import Aside from './layout/Aside'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
 import {connect} from 'react-redux'
-import { MDBDataTable, MDBTableHead, MDBTableBody } from 'mdbreact';
+import { MDBDataTable } from 'mdbreact';
 
 
 const Customers = ({customers}) => {
@@ -71,10 +71,7 @@ const Customers = ({customers}) => {
                             </div>
                             <div className="card-body--">
                                 <div className="table-stats ov-h">
-                                    <MDBDataTable>
-                                        <MDBTableHead columns={data.columns}/>
-                                        <MDBTableBody rows={data.rows}/>
-                                    </MDBDataTable>
+                                    <MDBDataTable data={data} paging={true} />                                        
                                 </div>
                             </div>
                         </div> 
