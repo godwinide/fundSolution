@@ -1,10 +1,58 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from './layout/Header'
 import Aside from './layout/Aside'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
 import {connect} from 'react-redux'
+import { MDBDataTable, MDBTableHead, MDBTableBody } from 'mdbreact';
+
 
 const Customers = ({customers}) => {
+
+    const [data, setData] = useState({
+        columns:[
+            {
+                label: 'Account No',
+                field: 'acc_no',
+                sort: 'asc',
+                width: 150
+            },
+            {
+                label: 'Name',
+                field: 'name',
+                sort: 'asc',
+                width: 150
+            },
+            {
+                label: 'Balance',
+                field: 'balance',
+                sort: 'asc',
+                width: 150
+            },
+            {
+                label: 'Action',
+                field: 'action',
+                sort: 'asc',
+                width: 150
+            },
+        ],
+        rows:[]
+    })
+
+    useEffect(() => {
+        const mappedCustomers = customers.map(c => ({
+            acc_no: c.account_number,
+            name: `${c.firstname} ${c.middlename} ${c.lastname} `,
+            balance: c.balance,
+            action: <NavLink to={`/customer-details/${c.account_number}`} className="btn btn-success">more</NavLink>
+
+        }));
+
+        setData({
+            ...data,
+            rows: mappedCustomers
+        });
+    }, [customers])
+
     return (
         <>
         <Aside/>
@@ -23,30 +71,10 @@ const Customers = ({customers}) => {
                             </div>
                             <div className="card-body--">
                                 <div className="table-stats ov-h">
-                                    <table id="example" class="table table-striped table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th className="serial">#</th>
-                                                <th className="avatar">Name</th>
-                                                <th>Balance</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {
-                                                customers.map(c => (
-                                                    <tr>
-                                                        <td className="serial">{c.account_number}</td>
-                                                        <td>  <span className="name">{c.firstname + " " + c.lastname}</span> </td>
-                                                        <td className="serial">N{c.balance}</td>
-                                                        <td className="serial">
-                                                            <NavLink to={`/customer-details/${c.account_number}`} className="btn btn-success">more</NavLink>
-                                                        </td>
-                                                    </tr>
-                                                ))
-                                            }
-                                        </tbody>
-                                    </table>
+                                    <MDBDataTable>
+                                        <MDBTableHead columns={data.columns}/>
+                                        <MDBTableBody rows={data.rows}/>
+                                    </MDBDataTable>
                                 </div>
                             </div>
                         </div> 
