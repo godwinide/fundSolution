@@ -5,6 +5,7 @@ import axios from 'axios';
 import {connect} from 'react-redux'
 import {getCustomers, getHistory} from '../actions/customer'
 import {tokenConfig} from '../actions/auth'
+import store from '../store'
 
 
 const ChangePassword = ({getCustomers, getHistory}) => {
@@ -20,14 +21,13 @@ const ChangePassword = ({getCustomers, getHistory}) => {
             setSuccessMsg("");
             setLoading(true);
             const data = {password, password1};
-            const res = await axios.post("/admin/change-password", data, tokenConfig());
+            const res = await axios.post("/admin/change-password", data, tokenConfig(store.getState));
             setLoading(false);
             setSuccessMsg(res.data.msg[0].msg);
             window.scrollTo(500, 0);
             setPassword("");
             setPassword1("");
         }catch(err){
-            console.log(err);
             window.scrollTo(500, 0);
             setLoading(false);
             typeof err.response === 'object'
