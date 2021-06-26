@@ -38,6 +38,7 @@ export default function (state=initState, action) {
         case AUTH_ERROR:
         case LOGOUT_SUCCESS:
             localStorage.removeItem("token")
+            console.log("hello")
             return{
                 ...state,
                 token: null,

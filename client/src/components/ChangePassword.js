@@ -27,6 +27,7 @@ const ChangePassword = ({getCustomers, getHistory}) => {
             setPassword("");
             setPassword1("");
         }catch(err){
+            console.log(err);
             window.scrollTo(500, 0);
             setLoading(false);
             typeof err.response === 'object'
