@@ -7,7 +7,7 @@ router.get("/", async(req,res) => {
         const history = await History.find({});
         return res.status(200).json({
             success: true,
-            history: history.slice(0, 30).reverse()
+            history: history.reverse()
         })
     }catch(err){
         res.status(500).json({success: false, msg:[{msg:"Internal Server Error"}]})

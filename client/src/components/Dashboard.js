@@ -2,14 +2,64 @@ import React, { useEffect, useState } from 'react'
 import Header from './layout/Header'
 import Aside from './layout/Aside'
 import {connect} from 'react-redux'
+import {MDBTable} from 'mdbreact'
 
 const Dashboard = ({customers, history, commissionHistory}) => {
 
     const [availability, setAvailability] = useState(0);
+    const [data, setData] = useState({
+        columns:[
+            {
+                label: 'Type',
+                field: 'type',
+                sort: 'asc',
+                width: 150
+            },
+            {
+                label: 'Amount',
+                field: 'amount',
+                sort: 'asc',
+                width: 150
+            },
+            {
+                label: 'Balance',
+                field: 'balance',
+                sort: 'asc',
+                width: 150
+            },
+            {
+                label: 'Cashier',
+                field: 'cashier',
+                sort: 'asc',
+                width: 150
+            },
+            {
+                label: 'Date',
+                field: 'date',
+                sort: 'asc',
+                width: 150
+            },
+        ],
+        rows:[]
+    })
 
     useEffect(()=> {
         const total = customers.reduce((prev, curr) =>  prev + curr.balance,0);
         setAvailability(total);
+        const mappedData = history.map(h => ({
+            type: h.type === 'credit'
+            ?<td>  <span className="name text-success">Credit</span> </td>
+            :<td>  <span className="name text-danger">Debit</span> </td>,
+            amount: h.amount,
+            balance: h.balance,
+            cashier: h.cashier.username,
+            date:  new Date(h.date).toLocaleString()
+
+        }))
+        setData({
+            ...data.columns,
+            rows: mappedData
+        });
     },[history])
 
     return (
@@ -109,36 +159,7 @@ const Dashboard = ({customers, history, commissionHistory}) => {
                             </div>
                             <div className="card-body--">
                                 <div className="table-stats ov-h">
-                                    <table id="example" class="table table-striped table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th className="serial">#</th>
-                                                <th className="avatar">Type</th>
-                                                <th>Amount</th>
-                                                <th>Cashier</th>
-                                                <th>Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {
-                                                history.map((h, key) => (
-                                                    <tr key={key}>
-                                                        <td className="serial">{h.account_number}</td>
-                                                        {
-                                                            h.type === "credit"
-                                                            ?<td>  <span className="name text-success">{h.type}</span> </td>
-                                                            :<td>  <span className="name text-danger">{h.type}</span> </td>
-                                                        }
-                                                        <td className="serial">N{h.amount}</td>
-                                                        <td className="serial">{h.cashier.username}</td>
-                                                        <td className="serial">
-                                                            {new Date(h.date).toLocaleString()}
-                                                        </td>
-                                                    </tr>
-                                                ))
-                                            }
-                                        </tbody>
-                                    </table>
+                                    <MDBTable data={data} />
                                 </div>
                             </div>
                         </div> 

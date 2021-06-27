@@ -18,12 +18,12 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "SET PORT=8000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3303/api",
+  "proxy":"localhost/api/",
   "eslintConfig": {
     "extends": [
       "react-app",
